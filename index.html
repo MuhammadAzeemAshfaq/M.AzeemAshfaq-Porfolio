@@ -1135,8 +1135,8 @@
         </a>
       </div>
 
-      <!-- ✅ Replace "YOUR_FORM_ID" below with your Formspree form ID (e.g. xabcdefg) from formspree.io -->
-      <form class="contact-form" action="https://formspree.io/f/xeewndkj" method="POST">
+      <!-- Formspree ID: xeewndkj — submissions go to azeem.qa57@gmail.com -->
+      <form class="contact-form" id="contact-form">
         <div class="form-row">
           <div class="field">
             <label for="name">Name</label>
@@ -1155,10 +1155,11 @@
           <label for="message">Message</label>
           <textarea id="message" rows="5" placeholder="Tell me about your project or opportunity…" required></textarea>
         </div>
-        <button type="submit" class="btn-send">
+        <button type="submit" class="btn-send" id="send-btn">
           Send message
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         </button>
+        <p id="form-msg" style="display:none; font-size:0.875rem; margin-top:0.5rem;"></p>
       </form>
     </div>
   </div>
@@ -1177,6 +1178,50 @@
 </footer>
 
 <script>
+  const FORMSPREE_ID = 'xeewndkj';
+
+  document.getElementById('contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('send-btn');
+    const msg = document.getElementById('form-msg');
+
+    const data = {
+      name:    document.getElementById('name').value,
+      email:   document.getElementById('email').value,
+      subject: document.getElementById('subject').value,
+      message: document.getElementById('message').value
+    };
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    msg.style.display = 'none';
+
+    try {
+      const res = await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) {
+        msg.textContent = "Thanks for reaching out — I'll be in touch within 24 hours.";
+        msg.style.color = '#22C55E';
+        this.reset();
+      } else {
+        const err = await res.json();
+        msg.textContent = err.error || 'Something went wrong. Please try again.';
+        msg.style.color = '#E24B4A';
+      }
+    } catch (err) {
+      msg.textContent = 'Network error. Please check your connection and try again.';
+      msg.style.color = '#E24B4A';
+    }
+
+    msg.style.display = 'block';
+    btn.innerHTML = 'Send message <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+    btn.disabled = false;
+  });
+
   function showSkills(id) {
     document.querySelectorAll('.skills-content').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('.skill-category-btn').forEach(btn => btn.classList.remove('active'));
