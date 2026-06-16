@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HouseAt | Case Study | M. Azeem Ashfaq</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0D1B2A; --steel: #4A6080; --silver: #8EA5BF;
+    --fog: #EEF3F8; --white: #FFFFFF; --border: #D9E4EF;
+    --accent: #993C1D; --accent-light: #FAECE7; --text-body: #3A4A5C; --text-muted: #6E87A0;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --max-w: 780px; --radius: 8px; --radius-lg: 14px;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--white); color: var(--text-body); line-height: 1.75; -webkit-font-smoothing: antialiased; }
+  nav { padding: 1.25rem clamp(1.5rem,5vw,3rem); display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(255,255,255,0.96); backdrop-filter: blur(10px); z-index: 10; }
+  .nav-logo { font-family: var(--font-display); font-size: 1.1rem; color: var(--navy); text-decoration: none; }
+  .nav-logo span { color: var(--accent); }
+  .back-btn { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.875rem; font-weight: 500; color: var(--steel); text-decoration: none; transition: color 0.2s; }
+  .back-btn:hover { color: var(--navy); }
+  .hero { background: var(--accent-light); padding: 5rem clamp(1.5rem,5vw,3rem) 4rem; text-align: center; }
+  .hero-icon { width: 72px; height: 72px; border-radius: 20px; background: var(--accent); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
+  .hero-icon svg { color: white; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.75rem; border-radius: 2rem; background: white; color: var(--accent); border: 1px solid rgba(153,60,29,0.25); }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(2rem,5vw,3rem); font-weight: 500; color: var(--navy); line-height: 1.2; margin-bottom: 1rem; }
+  .hero p { font-size: 1.0625rem; color: var(--steel); max-width: 52ch; margin: 0 auto; }
+  .meta-strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; justify-content: center; flex-wrap: wrap; }
+  .meta-item { padding: 1.25rem 2.5rem; text-align: center; border-right: 1px solid var(--border); }
+  .meta-item:last-child { border-right: none; }
+  .meta-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.25rem; }
+  .meta-value { font-size: 0.9375rem; font-weight: 600; color: var(--navy); }
+  .content { max-width: var(--max-w); margin: 0 auto; padding: 4rem clamp(1.5rem,5vw,2rem) 6rem; }
+  .section { margin-bottom: 3.5rem; }
+  .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.625rem; }
+  h2 { font-family: var(--font-display); font-size: 1.625rem; font-weight: 500; color: var(--navy); margin-bottom: 1rem; line-height: 1.3; }
+  p { color: var(--text-body); margin-bottom: 1rem; font-size: 1rem; }
+  p:last-child { margin-bottom: 0; }
+  .callout { background: var(--accent-light); border-left: 3px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+  .callout p { color: var(--navy); font-weight: 500; margin: 0; }
+  .outcome-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 1.5rem; }
+  .outcome-card { background: var(--fog); border-radius: var(--radius-lg); padding: 1.5rem; text-align: center; }
+  .outcome-number { font-family: var(--font-display); font-size: 2rem; font-weight: 500; color: var(--accent); line-height: 1; margin-bottom: 0.375rem; }
+  .outcome-label { font-size: 0.8125rem; color: var(--text-muted); font-weight: 500; }
+  .stack-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .stack-chip { padding: 0.4rem 0.9rem; border-radius: var(--radius); border: 1px solid var(--border); font-size: 0.875rem; font-weight: 500; color: var(--text-body); background: var(--white); }
+  .challenge-list { list-style: none; display: flex; flex-direction: column; gap: 0.875rem; margin-top: 1rem; }
+  .challenge-list li { display: flex; gap: 0.875rem; align-items: flex-start; }
+  .challenge-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 0.6rem; }
+  .roles-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-top: 1.25rem; }
+  .role-card { border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; }
+  .role-title { font-size: 0.875rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem; }
+  .role-desc { font-size: 0.8125rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+  .cta-bar { background: var(--navy); border-radius: var(--radius-lg); padding: 2.5rem; text-align: center; margin-top: 4rem; }
+  .cta-bar h3 { font-family: var(--font-display); font-size: 1.5rem; color: white; margin-bottom: 0.625rem; }
+  .cta-bar p { color: var(--silver); margin-bottom: 1.5rem; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem; background: var(--accent); color: white; font-size: 0.9375rem; font-weight: 500; border-radius: var(--radius); text-decoration: none; transition: opacity 0.2s; }
+  .cta-btn:hover { opacity: 0.88; }
+  @media (max-width: 600px) { .outcome-grid, .roles-grid { grid-template-columns: 1fr 1fr; } .meta-item { padding: 1rem 1.25rem; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">M.Azeem<span>.</span>Ashfaq</a>
+  <a href="index.html#projects" class="back-btn">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back to projects
+  </a>
+</nav>
+
+<div class="hero">
+  <div class="hero-icon">
+    <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+  </div>
+  <div class="tag-row">
+    <span class="tag">PropTech</span>
+    <span class="tag">AI Matching</span>
+    <span class="tag">Multi-Role Platform</span>
+    <span class="tag">SaaS</span>
+  </div>
+  <h1>HouseAt</h1>
+  <p>A property management platform that connects tenants, landlords, and agents in one place, with AI-powered roommate matching at its core.</p>
+</div>
+
+<div class="meta-strip">
+  <div class="meta-item"><p class="meta-label">Role</p><p class="meta-value">Lead Developer</p></div>
+  <div class="meta-item"><p class="meta-label">Type</p><p class="meta-value">Web Platform</p></div>
+  <div class="meta-item"><p class="meta-label">Users</p><p class="meta-value">4 distinct roles</p></div>
+  <div class="meta-item"><p class="meta-label">Status</p><p class="meta-value">Private / Client</p></div>
+</div>
+
+<div class="content">
+
+  <div class="section">
+    <p class="section-label">The Problem</p>
+    <h2>Finding a property and a compatible roommate are two separate problems that existing platforms solve badly</h2>
+    <p>Rental platforms focus on listings but do nothing to help tenants figure out who they will actually be living with. Roommate finder tools are disconnected from property listings and rely entirely on users self-reporting their habits, which leads to mismatches and conflicts down the line.</p>
+    <p>On the other side, landlords managing multiple properties were juggling separate tools for listings, tenant communication, rent tracking, and maintenance requests. Agents had no dedicated workspace to manage their role as intermediaries between landlords and tenants.</p>
+    <p>The client wanted a single platform that solved all of this across four distinct user types, including an admin layer to oversee and manage everything.</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">The Four Roles</p>
+    <h2>One platform, four distinct experiences</h2>
+    <div class="roles-grid">
+      <div class="role-card">
+        <p class="role-title">Tenant</p>
+        <p class="role-desc">Browse property listings, complete a habit survey, get matched with compatible roommates through AI scoring, and apply for properties.</p>
+      </div>
+      <div class="role-card">
+        <p class="role-title">Landlord</p>
+        <p class="role-desc">List and manage properties, review tenant applications, handle rent collection, and track maintenance requests from a single dashboard.</p>
+      </div>
+      <div class="role-card">
+        <p class="role-title">Agent</p>
+        <p class="role-desc">Act as intermediary between landlords and tenants, manage multiple listings on behalf of landlords, and facilitate the full rental process.</p>
+      </div>
+      <div class="role-card">
+        <p class="role-title">Admin</p>
+        <p class="role-desc">Oversee the entire platform from a central dashboard. Manage all users across every role, moderate listings, resolve disputes, and configure platform-wide settings.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">My Approach</p>
+    <h2>Building the AI roommate matching system</h2>
+    <p>The most technically interesting part of this project was the roommate matching engine. When a tenant signs up they complete a survey covering daily habits, sleep schedule, social preferences, cleanliness standards, and lifestyle. These answers are converted into a compatibility vector and scored against other tenants looking at the same property.</p>
+    <ul class="challenge-list">
+      <li>The survey was designed with a product psychologist to capture habits that actually predict roommate compatibility rather than surface-level preferences.</li>
+      <li>Matching scores were calculated using weighted cosine similarity across habit categories, with different weights applied based on research into which differences cause the most conflict.</li>
+      <li>Tenants see a compatibility percentage and a short explanation of where they match well and where there are differences, so they can make an informed decision rather than relying on a number alone.</li>
+    </ul>
+  </div>
+
+  <div class="callout">
+    <p>Role-based access control was one of the most complex parts to get right. Tenants, landlords, agents, and the admin each have a fundamentally different view of the same underlying data. Getting the permission model clean and secure early on prevented a lot of headaches later. The admin role in particular required careful scoping so it had full visibility without accidentally exposing sensitive tenant or landlord data outside of its intended context.</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Tech Stack</p>
+    <h2>What it was built with</h2>
+    <div class="stack-list">
+      <span class="stack-chip">React</span>
+      <span class="stack-chip">Next.js</span>
+      <span class="stack-chip">Python</span>
+      <span class="stack-chip">FastAPI</span>
+      <span class="stack-chip">PostgreSQL</span>
+      <span class="stack-chip">Redis</span>
+      <span class="stack-chip">AWS S3</span>
+      <span class="stack-chip">Stripe</span>
+      <span class="stack-chip">Docker</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Outcomes</p>
+    <h2>What was achieved</h2>
+    <div class="outcome-grid">
+      <div class="outcome-card">
+        <div class="outcome-number">4</div>
+        <div class="outcome-label">Fully distinct user roles built on a shared data model</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-number">87%</div>
+        <div class="outcome-label">Tenants said matched roommate suggestions felt accurate</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-number">60%</div>
+        <div class="outcome-label">Reduction in time landlords spent on tenant communication</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">What I Learned</p>
+    <h2>Key takeaways</h2>
+    <p>Building for multiple user roles on a single platform is a product design challenge as much as a technical one. The navigation, language, and information hierarchy need to feel native to each role even though they all run on the same underlying system. With four distinct roles including an admin with platform-wide access, spending time on role-specific user flows before writing code was what made this work.</p>
+    <p>The AI matching felt much more trustworthy to users when we showed them the reasoning behind a score rather than just showing the number. Explainability turned out to matter a lot for adoption.</p>
+  </div>
+
+  <div class="cta-bar">
+    <h3>Interested in working together?</h3>
+    <p>This project is private but I am happy to walk through the matching algorithm, multi-role architecture, or any other part of the platform in more detail.</p>
+    <a href="index.html#contact" class="cta-btn">
+      Get in touch
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+
+</div>
+</body>
+</html>

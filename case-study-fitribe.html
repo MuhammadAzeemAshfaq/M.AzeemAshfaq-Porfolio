@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fitribe | Case Study | M. Azeem Ashfaq</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0D1B2A; --steel: #4A6080; --silver: #8EA5BF;
+    --fog: #EEF3F8; --white: #FFFFFF; --border: #D9E4EF;
+    --accent: #0F6E56; --accent-light: #E1F5EE; --text-body: #3A4A5C; --text-muted: #6E87A0;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --max-w: 780px; --radius: 8px; --radius-lg: 14px;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--white); color: var(--text-body); line-height: 1.75; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav { padding: 1.25rem clamp(1.5rem,5vw,3rem); display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(255,255,255,0.96); backdrop-filter: blur(10px); z-index: 10; }
+  .nav-logo { font-family: var(--font-display); font-size: 1.1rem; color: var(--navy); text-decoration: none; }
+  .nav-logo span { color: var(--accent); }
+  .back-btn { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.875rem; font-weight: 500; color: var(--steel); text-decoration: none; transition: color 0.2s; }
+  .back-btn:hover { color: var(--navy); }
+
+  /* HERO */
+  .hero { background: var(--accent-light); padding: 5rem clamp(1.5rem,5vw,3rem) 4rem; text-align: center; }
+  .hero-icon { width: 72px; height: 72px; border-radius: 20px; background: var(--accent); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
+  .hero-icon svg { color: white; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.75rem; border-radius: 2rem; background: white; color: var(--accent); border: 1px solid rgba(15,110,86,0.25); }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(2rem,5vw,3rem); font-weight: 500; color: var(--navy); line-height: 1.2; margin-bottom: 1rem; }
+  .hero p { font-size: 1.0625rem; color: var(--steel); max-width: 52ch; margin: 0 auto; }
+
+  /* META STRIP */
+  .meta-strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; justify-content: center; flex-wrap: wrap; gap: 0; }
+  .meta-item { padding: 1.25rem 2.5rem; text-align: center; border-right: 1px solid var(--border); }
+  .meta-item:last-child { border-right: none; }
+  .meta-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.25rem; }
+  .meta-value { font-size: 0.9375rem; font-weight: 600; color: var(--navy); }
+
+  /* CONTENT */
+  .content { max-width: var(--max-w); margin: 0 auto; padding: 4rem clamp(1.5rem,5vw,2rem) 6rem; }
+  .section { margin-bottom: 3.5rem; }
+  .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.625rem; }
+  h2 { font-family: var(--font-display); font-size: 1.625rem; font-weight: 500; color: var(--navy); margin-bottom: 1rem; line-height: 1.3; }
+  p { color: var(--text-body); margin-bottom: 1rem; font-size: 1rem; }
+  p:last-child { margin-bottom: 0; }
+
+  /* CALLOUT */
+  .callout { background: var(--accent-light); border-left: 3px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+  .callout p { color: var(--navy); font-weight: 500; margin: 0; }
+
+  /* OUTCOME GRID */
+  .outcome-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 1.5rem; }
+  .outcome-card { background: var(--fog); border-radius: var(--radius-lg); padding: 1.5rem; text-align: center; }
+  .outcome-number { font-family: var(--font-display); font-size: 2rem; font-weight: 500; color: var(--accent); line-height: 1; margin-bottom: 0.375rem; }
+  .outcome-label { font-size: 0.8125rem; color: var(--text-muted); font-weight: 500; }
+
+  /* STACK */
+  .stack-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .stack-chip { padding: 0.4rem 0.9rem; border-radius: var(--radius); border: 1px solid var(--border); font-size: 0.875rem; font-weight: 500; color: var(--text-body); background: var(--white); }
+
+  /* CHALLENGE LIST */
+  .challenge-list { list-style: none; display: flex; flex-direction: column; gap: 0.875rem; margin-top: 1rem; }
+  .challenge-list li { display: flex; gap: 0.875rem; align-items: flex-start; }
+  .challenge-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 0.6rem; }
+
+  /* CTA */
+  .cta-bar { background: var(--navy); border-radius: var(--radius-lg); padding: 2.5rem; text-align: center; margin-top: 4rem; }
+  .cta-bar h3 { font-family: var(--font-display); font-size: 1.5rem; color: white; margin-bottom: 0.625rem; }
+  .cta-bar p { color: var(--silver); margin-bottom: 1.5rem; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem; background: var(--accent); color: white; font-size: 0.9375rem; font-weight: 500; border-radius: var(--radius); text-decoration: none; transition: opacity 0.2s; }
+  .cta-btn:hover { opacity: 0.88; }
+
+  @media (max-width: 600px) {
+    .outcome-grid { grid-template-columns: 1fr 1fr; }
+    .meta-item { padding: 1rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">M.Azeem<span>.</span>Ashfaq</a>
+  <a href="index.html#projects" class="back-btn">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back to projects
+  </a>
+</nav>
+
+<div class="hero">
+  <div class="hero-icon">
+    <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 18a5 5 0 00-10 0"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/><line x1="23" y1="22" x2="1" y2="22"/><polyline points="8 6 12 2 16 6"/></svg>
+  </div>
+  <div class="tag-row">
+    <span class="tag">Mobile App</span>
+    <span class="tag">AI / ML</span>
+    <span class="tag">Augmented Reality</span>
+    <span class="tag">Gamification</span>
+  </div>
+  <h1>Fitribe</h1>
+  <p>An AI-powered fitness and community platform that makes working out smarter, more engaging, and social.</p>
+</div>
+
+<div class="meta-strip">
+  <div class="meta-item"><p class="meta-label">Role</p><p class="meta-value">Lead Developer</p></div>
+  <div class="meta-item"><p class="meta-label">Type</p><p class="meta-value">Mobile Application</p></div>
+  <div class="meta-item"><p class="meta-label">Platform</p><p class="meta-value">iOS and Android</p></div>
+  <div class="meta-item"><p class="meta-label">Status</p><p class="meta-value">Private / Client</p></div>
+</div>
+
+<div class="content">
+
+  <div class="section">
+    <p class="section-label">The Problem</p>
+    <h2>Most fitness apps tell you what to do but not whether you are doing it right</h2>
+    <p>People who work out at home or without a personal trainer often develop bad form without realising it. Over time this leads to injuries, slow progress, and eventually giving up. Existing apps offered workout plans but had no way to watch, correct, or motivate users in real time.</p>
+    <p>The client wanted a fitness app that felt less like a to-do list and more like having a coach and a community in your pocket.</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">My Approach</p>
+    <h2>Breaking the project into three core pillars</h2>
+    <p>Rather than trying to build everything at once, I broke the product into three focused areas and tackled each with a clear technical strategy.</p>
+    <ul class="challenge-list">
+      <li>The AI posture detection engine used the device camera with a pose estimation model to track joint positions in real time and compare them against reference form data, giving the user instant audio and visual feedback.</li>
+      <li>The AR challenge layer overlaid gamified workout targets onto the real world so users could complete exercises tied to their environment, making sessions feel different every day.</li>
+      <li>The community and leaderboard system tracked completed workouts, awarded points, and showed weekly rankings within friend groups and public tribes so users had a social reason to stay consistent.</li>
+    </ul>
+  </div>
+
+  <div class="callout">
+    <p>The biggest technical challenge was running pose estimation on-device without draining the battery or causing lag. I optimised the model pipeline to process frames at 20fps on mid-range Android devices, which covered most of the target user base.</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Tech Stack</p>
+    <h2>What it was built with</h2>
+    <div class="stack-list">
+      <span class="stack-chip">React Native</span>
+      <span class="stack-chip">TensorFlow Lite</span>
+      <span class="stack-chip">MediaPipe Pose</span>
+      <span class="stack-chip">ARKit / ARCore</span>
+      <span class="stack-chip">Node.js</span>
+      <span class="stack-chip">Firebase</span>
+      <span class="stack-chip">PostgreSQL</span>
+      <span class="stack-chip">WebSockets</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Outcomes</p>
+    <h2>Results after launch</h2>
+    <div class="outcome-grid">
+      <div class="outcome-card">
+        <div class="outcome-number">3x</div>
+        <div class="outcome-label">Longer average session time vs competitor apps</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-number">68%</div>
+        <div class="outcome-label">Users returned for a second workout within 48 hours</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-number">4.7★</div>
+        <div class="outcome-label">Average rating from beta testers</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">What I Learned</p>
+    <h2>Key takeaways</h2>
+    <p>On-device AI inference is very different from server-side inference. Getting the model small enough to run smoothly while keeping accuracy high required several rounds of quantisation and profiling. I came away with a much deeper understanding of mobile ML optimisation.</p>
+    <p>Gamification only works when the rewards feel earned. We went through three iterations of the leaderboard and points system before we found a balance that felt motivating rather than hollow. User testing at each stage was essential.</p>
+  </div>
+
+  <div class="cta-bar">
+    <h3>Interested in working together?</h3>
+    <p>This project is private but I am happy to discuss the approach, architecture, or any specific technical aspect in more detail.</p>
+    <a href="index.html#contact" class="cta-btn">
+      Get in touch
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+
+</div>
+</body>
+</html>

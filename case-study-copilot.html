@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Meeting Copilot | Case Study | M. Azeem Ashfaq</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0D1B2A; --steel: #4A6080; --silver: #8EA5BF;
+    --fog: #EEF3F8; --white: #FFFFFF; --border: #D9E4EF;
+    --accent: #534AB7; --accent-light: #EEEDFE; --text-body: #3A4A5C; --text-muted: #6E87A0;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --max-w: 780px; --radius: 8px; --radius-lg: 14px;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--white); color: var(--text-body); line-height: 1.75; -webkit-font-smoothing: antialiased; }
+  nav { padding: 1.25rem clamp(1.5rem,5vw,3rem); display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(255,255,255,0.96); backdrop-filter: blur(10px); z-index: 10; }
+  .nav-logo { font-family: var(--font-display); font-size: 1.1rem; color: var(--navy); text-decoration: none; }
+  .nav-logo span { color: var(--accent); }
+  .back-btn { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.875rem; font-weight: 500; color: var(--steel); text-decoration: none; transition: color 0.2s; }
+  .back-btn:hover { color: var(--navy); }
+  .hero { background: var(--accent-light); padding: 5rem clamp(1.5rem,5vw,3rem) 4rem; text-align: center; }
+  .hero-icon { width: 72px; height: 72px; border-radius: 20px; background: var(--accent); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
+  .hero-icon svg { color: white; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.75rem; border-radius: 2rem; background: white; color: var(--accent); border: 1px solid rgba(83,74,183,0.25); }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(2rem,5vw,3rem); font-weight: 500; color: var(--navy); line-height: 1.2; margin-bottom: 1rem; }
+  .hero p { font-size: 1.0625rem; color: var(--steel); max-width: 52ch; margin: 0 auto; }
+  .meta-strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; justify-content: center; flex-wrap: wrap; }
+  .meta-item { padding: 1.25rem 2.5rem; text-align: center; border-right: 1px solid var(--border); }
+  .meta-item:last-child { border-right: none; }
+  .meta-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.25rem; }
+  .meta-value { font-size: 0.9375rem; font-weight: 600; color: var(--navy); }
+  .content { max-width: var(--max-w); margin: 0 auto; padding: 4rem clamp(1.5rem,5vw,2rem) 6rem; }
+  .section { margin-bottom: 3.5rem; }
+  .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.625rem; }
+  h2 { font-family: var(--font-display); font-size: 1.625rem; font-weight: 500; color: var(--navy); margin-bottom: 1rem; line-height: 1.3; }
+  p { color: var(--text-body); margin-bottom: 1rem; font-size: 1rem; }
+  p:last-child { margin-bottom: 0; }
+  .callout { background: var(--accent-light); border-left: 3px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+  .callout p { color: var(--navy); font-weight: 500; margin: 0; }
+  .outcome-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 1.5rem; }
+  .outcome-card { background: var(--fog); border-radius: var(--radius-lg); padding: 1.5rem; text-align: center; }
+  .outcome-number { font-family: var(--font-display); font-size: 2rem; font-weight: 500; color: var(--accent); line-height: 1; margin-bottom: 0.375rem; }
+  .outcome-label { font-size: 0.8125rem; color: var(--text-muted); font-weight: 500; }
+  .stack-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .stack-chip { padding: 0.4rem 0.9rem; border-radius: var(--radius); border: 1px solid var(--border); font-size: 0.875rem; font-weight: 500; color: var(--text-body); background: var(--white); }
+  .challenge-list { list-style: none; display: flex; flex-direction: column; gap: 0.875rem; margin-top: 1rem; }
+  .challenge-list li { display: flex; gap: 0.875rem; align-items: flex-start; }
+  .challenge-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 0.6rem; }
+  .cta-bar { background: var(--navy); border-radius: var(--radius-lg); padding: 2.5rem; text-align: center; margin-top: 4rem; }
+  .cta-bar h3 { font-family: var(--font-display); font-size: 1.5rem; color: white; margin-bottom: 0.625rem; }
+  .cta-bar p { color: var(--silver); margin-bottom: 1.5rem; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem; background: var(--accent); color: white; font-size: 0.9375rem; font-weight: 500; border-radius: var(--radius); text-decoration: none; transition: opacity 0.2s; }
+  .cta-btn:hover { opacity: 0.88; }
+  @media (max-width: 600px) { .outcome-grid { grid-template-columns: 1fr 1fr; } .meta-item { padding: 1rem 1.25rem; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">M.Azeem<span>.</span>Ashfaq</a>
+  <a href="index.html#projects" class="back-btn">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back to projects
+  </a>
+</nav>
+
+<div class="hero">
+  <div class="hero-icon">
+    <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+  </div>
+  <div class="tag-row">
+    <span class="tag">AI</span>
+    <span class="tag">Real-Time</span>
+    <span class="tag">NLP</span>
+    <span class="tag">Productivity</span>
+  </div>
+  <h1>AI Meeting Copilot</h1>
+  <p>A real-time meeting assistant that transcribes, detects questions, and generates smart answers on the fly so you can focus on the conversation.</p>
+</div>
+
+<div class="meta-strip">
+  <div class="meta-item"><p class="meta-label">Role</p><p class="meta-value">Lead Developer</p></div>
+  <div class="meta-item"><p class="meta-label">Type</p><p class="meta-value">Web Application</p></div>
+  <div class="meta-item"><p class="meta-label">Context</p><p class="meta-value">Meetings and Interviews</p></div>
+  <div class="meta-item"><p class="meta-label">Status</p><p class="meta-value">Private / Client</p></div>
+</div>
+
+<div class="content">
+
+  <div class="section">
+    <p class="section-label">The Problem</p>
+    <h2>Important meetings are stressful when you cannot keep up with both listening and responding</h2>
+    <p>Whether it is a client presentation, a technical interview, or a board meeting, participants often struggle to listen carefully, take notes, and think of the right response all at the same time. People miss questions, forget key points, or give incomplete answers simply because the cognitive load is too high.</p>
+    <p>The client needed a tool that could sit quietly in the background during any meeting, follow the conversation in real time, and surface relevant information the moment it was needed without being distracting.</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">My Approach</p>
+    <h2>Three real-time layers working together</h2>
+    <p>The product was built around a real-time audio pipeline with three distinct processing layers running concurrently.</p>
+    <ul class="challenge-list">
+      <li>A live transcription layer that captured microphone audio and converted speech to text with low latency using a streaming speech-to-text model, displaying a rolling transcript on screen.</li>
+      <li>A question detection layer that analysed each new sentence as it was transcribed and classified it as a statement or a question using a fine-tuned NLP model, flagging questions with a visual highlight so the user could see them instantly.</li>
+      <li>An answer generation layer that took each detected question and retrieved relevant content from a context document the user uploaded before the meeting, then combined that with general knowledge to generate a concise suggested answer within a couple of seconds.</li>
+    </ul>
+  </div>
+
+  <div class="callout">
+    <p>The hardest part was keeping end-to-end latency under two seconds from speech to suggested answer. Achieving this required careful pipeline architecture, streaming API calls, and running question detection client-side rather than server-side to eliminate a round trip.</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Tech Stack</p>
+    <h2>What it was built with</h2>
+    <div class="stack-list">
+      <span class="stack-chip">Next.js</span>
+      <span class="stack-chip">Web Speech API</span>
+      <span class="stack-chip">OpenAI Whisper</span>
+      <span class="stack-chip">GPT-4o</span>
+      <span class="stack-chip">LangChain</span>
+      <span class="stack-chip">WebSockets</span>
+      <span class="stack-chip">Pinecone</span>
+      <span class="stack-chip">Node.js</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Outcomes</p>
+    <h2>What users reported after using it</h2>
+    <div class="outcome-grid">
+      <div class="outcome-card">
+        <div class="outcome-number">&lt;2s</div>
+        <div class="outcome-label">Average time from question spoken to answer suggested</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-number">91%</div>
+        <div class="outcome-label">Question detection accuracy in real meeting conditions</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-number">8 of 10</div>
+        <div class="outcome-label">Users said it noticeably reduced their stress in meetings</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">What I Learned</p>
+    <h2>Key takeaways</h2>
+    <p>Real-time AI applications have a completely different set of constraints compared to standard request-response applications. Every millisecond matters and users notice even small delays. Building this project gave me a much deeper understanding of streaming APIs, WebSocket architecture, and how to design systems where multiple async processes need to stay in sync.</p>
+    <p>Context quality matters more than model quality. The most impactful improvement to answer relevance came from improving how the uploaded document was chunked and indexed, not from swapping to a bigger model.</p>
+  </div>
+
+  <div class="cta-bar">
+    <h3>Interested in working together?</h3>
+    <p>This project is private but I am happy to discuss the real-time pipeline, AI architecture, or any aspect of the implementation in more detail.</p>
+    <a href="index.html#contact" class="cta-btn">
+      Get in touch
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+
+</div>
+</body>
+</html>
